@@ -55,7 +55,7 @@ life.on('love', function(who) {
 })
 
 life.on('love', function(who) {
-	console.log('hand over wages for ' + who)
+	console.log('hand over wages to ' + who)
 })
 
 
