@@ -6,9 +6,77 @@
 <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>imooc jade study</title>
+  <title>JADE study</title>
 </head>
 <body>
+  <h2>mixin</h2>
+    <p>imooc jade study</p>
+    <p>tom</p>
+    <ul class="courses">
+      <li>jade</li>
+      <li>node</li>
+    </ul>
+  <h3>nested mixin</h3>
+    <h4>tony</h4>
+      <p>tony</p>
+      <ul class="courses">
+        <li>jade</li>
+        <li>node</li>
+      </ul>
+  <h3>block</h3>
+    <h4>slogan</h4>
+    <p>Good job!</p>
+    <!-- code block after mixin call will be inserted into the 'block' of mixin-->
+  <h3>attribute</h3>
+    <p class="magic">attr</p>
+    <p id="attrid" class="magic2">attrs</p>
+  <h3>variable parameters</h3>
+    <ul class="magic">
+      <li>node</li>
+      <li>jade</li>
+      <li>...</li>
+    </ul>
+  <h2>control flow</h2>
+  <h3>if else</h3>
+  <p>more than 1: jade, node</p>
+  <h3>unless</h3>
+  <p>2</p>
+  <h3>case</h3>
+  <p>Hi Jade</p>
+  <h3>while</h3>
+  <ul>
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <h3>for</h3>
+  <p>jade</p>
+  <p>high</p>
+  <h3>each</h3>
+  <p>course: jade</p>
+  <p>level: high</p>
+  <h3>iterate arrays</h3>
+  <p>node</p>
+  <p>jade</p>
+  <p>express</p>
+  <h3>nested each</h3>
+  <dl>
+    <dt>1</dt>
+    <dd>a</dd>
+    <dd>b</dd>
+    <dt>2</dt>
+    <dd>c</dd>
+    <dd>d</dd>
+  </dl>
+  <h2>safe text</h2>
+  <p>text</p>
+  <p>&lt;script&gt;alert(1);&lt;/script&gt;&lt;span&gt;script&lt;/span&gt;;</p>
+  <!-- p !{htmlData}-->
+  <p>&lt;script&gt;alert(1);&lt;/script&gt;&lt;span&gt;script&lt;/span&gt;;</p>
+  <!-- p!= htmlData-->
+  <p>#{htmlData}</p>
+  <p>!{htmlData}</p>
   <style>body {color: #f60}</style>
   <script>var imoocCourse = 'jade';</script>
   <h2>document declaration</h2>

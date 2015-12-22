@@ -28,3 +28,22 @@ p
   span 12
   | 3. cc
 ```
+Define and use a variable
+```jade
+- var course = 'jade'
+title #{course.toUpperCase()}
+```
+Safe text and raw text
+```jade
+p #{data}
+p !{data}
+input(value=data)
+
+// or
+p= data
+p!= data
+```
+Escape '{' and '}'
+```jade
+p \!{data}
+```
