@@ -1,6 +1,48 @@
 doctype html
-html
-	head
-		title imooc jade study
-	body
-		h1 imooc jade study
+<!--[if IE 8]>
+<html lang="en" class="lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
+head
+	meta(charset='utf-8')
+	title imooc jade study
+body
+	style.
+		body {color: #f60}
+	script.
+		var imoocCourse = 'jade';
+	h2 document declaration
+	h2 tag syntax
+	section
+		div
+			ul
+			p
+	h2 element attributes
+	#id.class1(class='class2')
+		a(href='http://imooc.com', title='imooc jade study', data-uid='1000') link
+	h2 comment
+	h3 single-line
+	// h1.title(id='title2', class='title2') imooc jade study
+	h3 unbuffered comment
+	//- a(href='http://imooc.com', title='imooc jade study', data-uid='1000') link
+	h3 block comment
+	//-
+		input(name='course', type='text', value='jade')
+		input(name='type', type='checkbox', checked)
+
+	h3 long paragraph
+	p
+		| 1. aa
+		strong 11
+		| 2. bb
+		span 22
+		| 3. cc
+	p.
+		1. aa<strong>11</strong>
+		2. bb
+		<span>22</span>
+		3. c
+		4. dd
+</html>
