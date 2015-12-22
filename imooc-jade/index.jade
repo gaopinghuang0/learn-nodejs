@@ -1,6 +1,25 @@
 extends layout
 
 block content
+  h2 filter
+  h3 markdown
+  :markdown
+    Hi, this is **imooc** [link](http://imooc.com)
+  h3 sass
+  style
+    :sass
+      body {
+        p {
+          :hover {
+            color: #333;
+          }
+        }
+      }
+  h3 coffee
+  script
+    :coffee-script
+      console.log 'This is coffee!'
+
   include style
   include title.html
   

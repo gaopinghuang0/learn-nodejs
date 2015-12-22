@@ -49,3 +49,18 @@ Escape '{' and '}'
 ```jade
 p \!{data}
 ```
+
+### Use Jade API
+```
+npm install jade
+// require jade in server.js
+node server
+```
+
+### Use filters
+install plugin to global
+```
+npm install sass coffee-script markdown -g
+// after Jade@2.0.0
+npm install jstransformer-sass jstransformer-coffee-script jstransformer-markdown -g
+```
