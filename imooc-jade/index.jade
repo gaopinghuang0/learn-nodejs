@@ -1,6 +1,17 @@
 extends layout
 
 block content
+  h2 runtime
+  #runtime
+  script(src="node_modules/jade/runtime.js")
+  script(src='runtime.js')
+  script.
+    var runtimeNode = document.getElementById('runtime');
+    var runtimeHtml = template({
+      isRuntime: true
+    });
+    runtimeNode.innerHTML = runtimeHtml;
+
   h2 filter
   h3 markdown
   :markdown
@@ -8,13 +19,9 @@ block content
   h3 sass
   style
     :sass
-      body {
-        p {
-          :hover {
-            color: #333;
-          }
-        }
-      }
+      body p
+        &:hover
+          color: #333;
   h3 coffee
   script
     :coffee-script

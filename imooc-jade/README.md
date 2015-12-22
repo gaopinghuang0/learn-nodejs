@@ -10,6 +10,8 @@ npm install -g jade
 jade -P -w index.jade
 // pass variable via command line
 jade -P -w index.jade --obj '{"course": "jade"}'
+// pass variable via json file
+jade -P -w index.jade -O imooc.json
 ```
 
 ### Rules
@@ -63,4 +65,16 @@ install plugin to global
 npm install sass coffee-script markdown -g
 // after Jade@2.0.0
 npm install jstransformer-sass jstransformer-coffee-script jstransformer-markdown -g
+```
+
+### Runtime pre-compile
+```
+jade --client --no-debug runtime.jade
+// generate runtime.js-
+```
+
+### Re-compile html to jade
+```
+npm install html2jade -g
+html2jade http://www.imooc.com > imooc.jade
 ```
