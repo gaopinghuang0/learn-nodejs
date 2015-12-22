@@ -8,6 +8,8 @@ npm install -g jade
 ### Run
 ```
 jade -P -w index.jade
+// pass variable via command line
+jade -P -w index.jade --obj '{"course": "jade"}'
 ```
 
 ### Rules

@@ -1,15 +1,12 @@
-doctype html
-<!--[if IE 8]>
-<html lang="en" class="lt-ie9">
-<![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en">
-<!--<![endif]-->
-head
-  meta(charset='utf-8')
-  - var course = 'jade'
-  title #{course.toUpperCase()} study
-body
+extends layout
+
+block content
+  include style
+  include title.html
+  
+  h2 template inherit
+  block desc
+    p desc from index
   h2 mixin
   mixin lesson
     p imooc jade study
@@ -152,4 +149,3 @@ body
     <span>22</span>
     3. c
     4. dd
-</html>
