@@ -1,0 +1,21 @@
+{
+  "name": "imooc",
+  "description": "",
+  "main": "",
+  "authors": [
+    "gaopinghuang0 <gaopinghuang@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gaopinghuang0/learn-nodejs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
