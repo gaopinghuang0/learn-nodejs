@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
     "jade": "^1.11.0",
-    "mongoose": "^4.3.3",
     "moment": "^2.10.6",
-    "express": "^4.13.3"
+    "mongoose": "^4.3.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "gaopinghuang0 <gaopinghuang@gmail.com>",
+  "author": "Scott from imooc",
   "license": "MIT"
 }
