@@ -1,0 +1,27 @@
+{
+  "name": "imooc",
+  "description": "imooc movies",
+  "main": "app.js",
+  "authors": [
+    "Scott from imooc"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gaopinghuang0/learn-nodejs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "public/libs"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  },
+  "keywords": [
+    "imooc",
+    "movies"
+  ],
+  "private": true
+}
