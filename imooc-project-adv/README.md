@@ -1,6 +1,6 @@
 # Movie Demo
 A movie demo with CRUD
-http://www.imooc.com/learn/75
+http://www.imooc.com/learn/197
 
 ### Tech Stack
 1. Node
