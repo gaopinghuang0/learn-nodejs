@@ -1,7 +1,7 @@
 {
   "name": "imooc",
-  "description": "",
-  "main": "",
+  "description": "imooc movies",
+  "main": "app.js",
   "authors": [
     "Scott from imooc"
   ],
@@ -13,9 +13,15 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "public/libs"
   ],
   "dependencies": {
     "bootstrap": "~3.3.6"
-  }
+  },
+  "keywords": [
+    "imooc",
+    "movies"
+  ],
+  "private": true
 }
