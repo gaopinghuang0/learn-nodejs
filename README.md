@@ -2,9 +2,9 @@
 Learn nodejs
 
 ### imooc movie demo
-node+mongodb建站（一期）, under `imooc-projects-basic/imooc`
+node+mongodb建站（一期）, under `imooc-movie-basic/imooc`
 
-node+mongodb建站（二期）, under `imooc-projects-adv/`
+node+mongodb建站（二期）, under `imooc-movie-adv/`
 
 
 ### Homebrew npm bug

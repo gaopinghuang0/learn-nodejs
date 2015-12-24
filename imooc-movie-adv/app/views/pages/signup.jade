@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-5
+				form(method="POST", action="/user/signup")
+					.modal-body
+						.form-group
+							label(for="signupName") Username
+							input#signupName.form-control(name="user[name]", type="text")
+						.form-group
+							label(for="signupPasswd") Password
+							input#signupPasswd.form-control(name="user[passwd]", type="text")
+					.modal-footer
+						button.btn.btn-default(type="button", data-dismiss="modal") Close
+						button.btn.btn-success(type="submit") Submit
