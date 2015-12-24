@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
 		unique: true,
 		type: String
 	},
-	password: String,
+	passwd: String,
 	meta: {
 		createAt: {
 			type: Date,
@@ -22,7 +22,7 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', function(next) {
 	var user = this;
-	
+
 	if (this.isNew) {
 		this.meta.createAt = this.meta.updateAt = Date.now()
 	} else {
@@ -32,13 +32,25 @@ UserSchema.pre('save', function(next) {
 	bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
 		if (err) return next(err);
 
-		bcrypt.hash(user.password, salt, function(err, hash) {
+		bcrypt.hash(user.passwd, salt, function(err, hash) {
 			if (err) return next(err);
-			user.password = hash;
+			user.passwd = hash;
 			next();
 		})
 	})
 })
+
+UserSchema.methods = {
+	comparePasswd: function(_passwd, cb) {
+		bcrypt.compare(_passwd, this.passwd, function(err, isMatch) {
+			if (err) {
+				return cb(err);
+			}
+
+			cb(null, isMatch);
+		})
+	}
+}
 
 UserSchema.statics = {
 	fetch: function(cb) {

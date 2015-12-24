@@ -4,6 +4,7 @@ var path = require('path')
 var mongoose = require('mongoose')
 var _ = require('underscore')
 var Movie = require('./models/movie')
+var User = require('./models/user')
 var port = process.env.PORT || 3000
 var app = express()
 
@@ -30,6 +31,74 @@ app.get('/', function(req, res) {
 		res.render('index', {
 			title: 'imooc Homepage',
 			movies: movies
+		})
+	})
+})
+
+// signup
+app.post('/user/signup', function(req, res) {
+	var _user = req.body.user;
+
+	User.find({name: _user.name}, function(err, user) {
+		if (err) {
+			console.log(err);
+		}
+
+		if (user) {  // dup username
+			return res.redirect('/');
+		} else {
+			var user = new User(_user);
+
+			user.save(function(err, user) {
+				if (err) {
+					console.log(err);
+				}
+				res.redirect('/admin/userlist');
+			})
+		}
+	})
+})
+
+// signin
+app.post('/user/signin', function(req, res) {
+	var _user = req.body.user,
+		name = _user.name,
+		passwd = _user.passwd;
+
+	User.findOne({name: name}, function(err, user) {
+		if (err) {
+			console.log(err);
+		}
+
+		if (!user) {
+			return res.redirect('/');
+		}
+
+		user.comparePasswd(passwd, function(err, isMatch) {
+			if (err) {
+				console.log(err);
+			}
+
+			if (isMatch) {
+				console.log('Password is matched');
+				return res.redirect('/');
+			} else {
+				console.log('Password is not matched');
+			}
+		})
+	})
+})
+
+// user list page
+app.get('/admin/userlist', function(req, res) {
+	User.fetch(function(err, users) {
+		if (err) {
+			console.log(err)
+		}
+
+		res.render('userlist', {
+			title: 'imooc Userlist',
+			users: users
 		})
 	})
 })

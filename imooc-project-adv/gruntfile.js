@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 					cwd: __dirname,
 					ignore: ['node_modules/**', 'README.md', '.DS_Store'],
 					ext: 'js,coffee',
-					watch: ['app', 'config'],
+					watch: ['./'],
 					delay: 1000,
 					legacyWatch: true
 				}
