@@ -1,14 +1,17 @@
 var express = require('express')
 var bodyParser = require('body-parser')
+var session = require('express-session')
+var mongoStore = require('connect-mongo')(session)
 var path = require('path')
 var mongoose = require('mongoose')
 var _ = require('underscore')
 var Movie = require('./models/movie')
 var User = require('./models/user')
 var port = process.env.PORT || 3000
+var dbUrl = 'mongodb://localhost/imooc'
 var app = express()
 
-mongoose.connect('mongodb://localhost/imooc')
+mongoose.connect(dbUrl)
 
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
@@ -16,13 +19,35 @@ app.set('view engine', 'jade')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+	secret: 'imooc',
+	store: new mongoStore({
+		url: dbUrl,
+		collection: 'sessions'
+	}),
+	resave: false,
+	saveUninitialized: true
+}))
 app.locals.moment = require('moment')
 app.listen(port)
 
 console.log('imooc stated on port ' + port)
 
+// pre handle user, so that every page can check session
+app.use(function(req, res, next) {
+	var _user = req.session.user
+
+	if (_user) {
+		app.locals.user = _user
+	}
+	return next()
+})
+
 // index page
 app.get('/', function(req, res) {
+	console.log('user in session: ')
+	console.log(req.session.user)
+
 	Movie.fetch(function(err, movies) {
 		if (err) {
 			console.log(err)
@@ -80,7 +105,8 @@ app.post('/user/signin', function(req, res) {
 			}
 
 			if (isMatch) {
-				console.log('Password is matched');
+				req.session.user = user;
+
 				return res.redirect('/');
 			} else {
 				console.log('Password is not matched');
@@ -88,6 +114,14 @@ app.post('/user/signin', function(req, res) {
 		})
 	})
 })
+
+// logout
+app.get('/logout', function(req, res) {
+	delete req.session.user;
+	delete app.locals.user;
+	res.redirect('/')
+})
+
 
 // user list page
 app.get('/admin/userlist', function(req, res) {

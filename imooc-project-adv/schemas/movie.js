@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 
+// Each schema maps to a MongoDB collection
 var MovieSchema = new mongoose.Schema({
 	doctor: String,
 	title: String,
