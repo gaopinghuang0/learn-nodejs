@@ -41,3 +41,8 @@ node app.js
 
 ### Release
 `bower init` and `npm init`
+
+### TODO
+after signin, we should stay in the same page
+after logout, we should also stay in the same page
+use ajax to show comments or edit comments
