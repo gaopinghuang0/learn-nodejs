@@ -45,4 +45,4 @@ node app.js
 ### TODO
 after signin, we should stay in the same page
 after logout, we should also stay in the same page
-use ajax to show comments or edit comments
+use angularjs and ajax to show comments or edit comments

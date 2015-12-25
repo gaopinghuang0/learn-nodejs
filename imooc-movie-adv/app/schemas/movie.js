@@ -1,7 +1,9 @@
 var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+var ObjectId = Schema.Types.ObjectId
 
 // Each schema maps to a MongoDB collection
-var MovieSchema = new mongoose.Schema({
+var MovieSchema = new Schema({
 	doctor: String,
 	title: String,
 	language: String,
@@ -10,6 +12,7 @@ var MovieSchema = new mongoose.Schema({
 	flash: String,
 	poster: String,
 	year: Number,
+	category: {type: ObjectId, ref: 'Category'},
 	meta: {
 		createAt: {
 			type: Date,

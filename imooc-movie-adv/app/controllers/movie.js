@@ -1,5 +1,6 @@
 var Movie = require('../models/movie')
 var Comment = require('../models/comment')
+var Category = require('../models/category')
 var _ = require('underscore')
 
 // detail page
@@ -23,18 +24,12 @@ exports.detail = function(req, res) {
 
 // admin page
 exports.new = function(req, res) {
-	res.render('admin', {
-		title: 'imooc Add new',
-		movie: {
-			doctor: '',
-			country: '',
-			title: '',
-			year: '',
-			poster: '',
-			language: '',
-			flash: '',
-			summary: ''
-		}
+	Category.find({}, function(err, categories) {
+		res.render('admin', {
+			title: 'imooc Add new',
+			categories: categories,
+			movie: {}
+		})
 	})
 }
 
@@ -44,9 +39,12 @@ exports.update = function(req, res) {
 
 	if (id) {
 		Movie.findById(id, function(err, movie) {
-			res.render('admin', {
-				title: 'imooc Update',
-				movie: movie
+			Category.find({}, function(err, categories) {
+				res.render('admin', {
+					title: 'imooc Update',
+					movie: movie,
+					categories: categories
+				})
 			})
 		})
 	}
@@ -59,7 +57,7 @@ exports.save = function(req, res) {
 	var movieObj = req.body.movie
 	var _movie;
 
-	if (id !== 'undefined') {  // typeof id == string
+	if (id) {  // typeof id == string
 		Movie.findById(id, function(err, movie) {
 			if (err) {
 				console.log(err)
@@ -75,23 +73,22 @@ exports.save = function(req, res) {
 			})
 		})
 	} else {
-		_movie = new Movie({
-			doctor: movieObj.doctor,
-			title: movieObj.title,
-			country: movieObj.country,
-			language: movieObj.language,
-			year: movieObj.year,
-			poster: movieObj.poster,
-			summary: movieObj.summary,
-			flash: movieObj.flash,
-		})
+		_movie = new Movie(movieObj)
+
+		var categoryId = _movie.category
 
 		_movie.save(function(err, movie) {
 			if (err) {
 				console.log(err)
 			}
 
-			res.redirect('/movie/' + movie._id)
+			Category.findById(categoryId, function(err, category) {
+				category.movies.push(movie._id)
+
+				category.save(function(err, category) {
+					res.redirect('/movie/' + movie._id)
+				})
+			})
 		})
 	}
 }
