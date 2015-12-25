@@ -17,9 +17,11 @@ app.set('view engine', 'jade')
 // use body-parser to grab info from POST
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
 	secret: 'imooc',
+	// use mongo to store session permanently
 	store: new mongoStore({
 		url: dbUrl,
 		collection: 'sessions'
@@ -28,9 +30,11 @@ app.use(session({
 	saveUninitialized: true
 }))
 
-if ('development' === app.get('env')) {
+var env = process.env.NODE_ENV || 'development'
+if ('development' === env) {
 	app.set('showStackError', true)
 	app.use(logger(':method :url :status'))
+	// prettify the page source
 	app.locals.pretty = true
 	mongoose.set('debug', true)
 }
