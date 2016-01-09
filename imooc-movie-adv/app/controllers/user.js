@@ -27,7 +27,7 @@ exports.signup = function(req, res) {
 		if (user) {  // dup username, ask signin
 			return res.redirect('/signin');
 		} else {
-			var user = new User(_user);
+			user = new User(_user);
 
 			user.save(function(err, user) {
 				if (err) {

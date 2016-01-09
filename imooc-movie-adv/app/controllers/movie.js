@@ -1,5 +1,5 @@
 var Movie = require('../models/movie')
-var Comment = require('../models/comment')
+var MyComment = require('../models/comment')
 var Category = require('../models/category')
 var _ = require('underscore')
 var fs = require('fs')
@@ -16,7 +16,7 @@ exports.detail = function(req, res) {
 		}
 	})
 	Movie.findById(id, function(err, movie) {
-		Comment
+		MyComment
 			.find({movie: id})
 			.populate('from', 'name')
 			.populate('reply.from reply.to', 'name')
@@ -76,7 +76,7 @@ exports.savePoster = function(req, res, next) {
 			var newPath = path.join(__dirname, '../../', '/public/upload/' + poster)
 
 			fs.writeFile(newPath, data, function(err) {
-				console.log("i am here")
+				console.log('i am here')
 				req.poster = poster
 				next()
 			})

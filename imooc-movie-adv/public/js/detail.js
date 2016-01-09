@@ -19,7 +19,7 @@ $(function() {
 			}).appendTo('#commentForm')
 		}
 
-		if ($("#commentId").length > 0) {
+		if ($('#commentId').length > 0) {
 			$('#commentId').val(commentId)
 		} else {
 			$('<input>').attr({

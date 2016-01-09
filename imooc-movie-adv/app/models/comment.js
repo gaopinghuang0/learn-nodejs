@@ -1,5 +1,7 @@
 var mongoose = require('mongoose')
 var CommentSchema = require('../schemas/comment')
-var Comment = mongoose.model('Comment', CommentSchema)
+// use MyComment to pass jshint, since Comment is built-in global
+// otherwise redifinition of Comment error
+var MyComment = mongoose.model('Comment', CommentSchema)
 
-module.exports = Comment
+module.exports = MyComment

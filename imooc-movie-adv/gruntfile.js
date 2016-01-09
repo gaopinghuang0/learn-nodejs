@@ -40,8 +40,34 @@ module.exports = function(grunt) {
 			},
 		},
 
+		uglify: {
+			development: {
+				files: {
+					'public/build/admin.min.js': 'public/js/admin.js',
+					'public/build/detail.min.js': 'public/js/detail.js'
+				}
+			}
+		},
+
+		jshint: {
+			options: {
+				jshintrc: '.jshintrc',
+				ignores: ['public/libs/**/*.js']
+			},
+			all: ['gruntfile.js', 'public/js/*.js', 'test/**/*.js', 'app/**/*.js']
+		},
+
+		mochaTest: {
+			test: {
+				options: {
+					reporter: 'spec'
+				}
+			},
+			src: ['test/**/*.js']
+		},
+
 		concurrent: {
-			tasks: ['nodemon', 'watch'],
+			tasks: ['nodemon', 'watch', 'uglify', 'jshint'],
 			options: {
 				logConcurrentOutput: true
 			}
@@ -51,8 +77,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	// do not abort when error
 	grunt.option('force', true);
+
 	grunt.registerTask('default', ['concurrent']);
+	grunt.registerTask('test', ['mochaTest'])
 }

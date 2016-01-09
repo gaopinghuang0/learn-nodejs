@@ -1,4 +1,4 @@
-var Comment = require('../models/comment')
+var MyComment = require('../models/comment')
 
 // comment
 exports.save = function(req, res) {
@@ -6,7 +6,7 @@ exports.save = function(req, res) {
 	var movieId = _comment.movie
 
 	if (_comment.cid) {  // reply
-		Comment.findById(_comment.cid, function(err, comment) {
+		MyComment.findById(_comment.cid, function(err, comment) {
 			var reply = {
 				from: _comment.from,
 				to: _comment.tid,
@@ -24,7 +24,7 @@ exports.save = function(req, res) {
 			})
 		})
 	} else {
-		var comment = new Comment(_comment)
+		var comment = new MyComment(_comment)
 
 		comment.save(function(err, comment) {
 			if (err) {

@@ -41,10 +41,10 @@ $(function() {
 		}
 	})
 
-	$("#save-movie").on('submit', function(e) {
+	$('#save-movie').on('submit', function(e) {
 		// stop submit if no category entered or checked
-		var inputCategory = $("#inputCategory")
-		var checkedRidios = $("input[name='movie[category]']:checked")
+		var inputCategory = $('#inputCategory')
+		var checkedRidios = $('input[name="movie[category]"]:checked')
 
 		if (inputCategory.val().length || checkedRidios.length) {
 			return true;
