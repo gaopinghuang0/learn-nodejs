@@ -6,6 +6,9 @@ node+mongodb建站（一期）, under `imooc-movie-basic/imooc`
 
 node+mongodb建站（二期）, under `imooc-movie-adv/`
 
+### socket.io
+socket-io-chat-example: http://socket.io/get-started/chat/
+
 
 ### Homebrew npm bug
 If node and npm are installed by homebrew, then when typing
