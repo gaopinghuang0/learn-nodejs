@@ -9,6 +9,8 @@ node+mongodb建站（二期）, under `imooc-movie-adv/`
 ### socket.io
 socket-io-chat-example: http://socket.io/get-started/chat/
 
+socket-io-advanced-chat: https://github.com/tpiros/advanced-chat (as well as the [ariticles mentioned in its README.md](https://github.com/tpiros/advanced-chat#whisper))
+
 
 ### Homebrew npm bug
 If node and npm are installed by homebrew, then when typing
