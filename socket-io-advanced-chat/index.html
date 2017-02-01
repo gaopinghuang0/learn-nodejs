@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-     <!-- livereload browser if dev -->
+  <meta charset="UTF-8">
+  <title>Socket.IO chat</title>
+  <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+  <!-- livereload browser if dev -->
   <script src="//localhost:35729/livereload.js"></script>
 </head>
 <body>
-  
+
   <div class="container">
     <div class="row">
       <div class="col-md-2">
@@ -21,15 +21,15 @@
     <div class="row">
       <div class="col-md-5 col-md-offset-2" id="login">
         <form class="form-inline">
-          <input id="name" type="text" class="form-control" placeholder="Your name">
-          <input type="button" name="join" value="Join" id="join" class="btn btn-primary">
+          <input type="text" id="name" class="form-control" placeholder="Your name">
+          <input type="button" id="join" name="join" value="Join" class="btn btn-primary">
         </form>
       </div>
       <div class="col-md-5 col-md-offset-2" id="chat">
         <form id="2" class="form-inline">
-        <input type="text" class="form-control">
+          <input type="text" id="msg" class="form-control" placeholder="Your message">
+          <input type="button" id="send" class="btn btn-success" value="Send" name="send">
         </form>
-        
       </div>
     </div>
   </div>
@@ -38,15 +38,80 @@
   <script src="/libs/jquery/dist/jquery.min.js"></script>
   <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
   <script>
+    $(document).ready(function() {
       var socket = io();
-      $('form').submit(function() {
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
+      var ready;
+
+      $('#chat').hide();
+      $('#name').focus();
+      $('form').submit(function(evt) {
+        evt.preventDefault();
+      });
+
+      $('#join').click(function() {
+        onSubmitName();
       })
-      socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').text(msg));
+      $("#name").keypress(function(e){
+        if(e.which == 13) {
+          onSubmitName();
+        }
+      });
+
+      socket.on('update', function(msg) {
+        if (ready) {
+          $('#msgs').append($('<li>').text(msg));
+        }
       })
-  </script>
+
+      socket.on('update-people', function(people) {
+        if (ready) {
+          $('#people').empty();
+          $.each(people, function(clientid, name) {
+            $('#people').append($('<li>').text(name));
+          })
+        }
+      })
+
+      socket.on('chat', function(who, msg) {
+        if (ready) {
+          $('#msgs').append($('<li>').text(who + ' says: ' + msg))
+        }
+      })
+
+      socket.on("disconnect", function(){
+        $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
+        $("#msg").attr("disabled", "disabled");
+        $("#send").attr("disabled", "disabled");
+      });
+
+      $("#send").click(function(){
+        onSubmitMsg();
+      });
+      $('#msg').keypress(function(e) {
+        if (e.which == 13) {
+          onSubmitMsg();
+        }
+      })
+
+      function onSubmitName() {
+        var name = $('#name').val();
+        if (name.length) {
+          socket.emit('join', name);
+          $('#login').detach();
+          $('#chat').show();
+          $('#msg').focus();
+          ready = true;
+        }
+      }
+
+      function onSubmitMsg() {
+       var msg = $("#msg").val();
+       socket.emit("send", msg);
+       $("#msg").val("");       
+     }
+
+
+   })
+ </script>
 </body>
 </html>
