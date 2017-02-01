@@ -1,9 +1,16 @@
 {
-  "name": "socket-chat-example",
+  "name": "socket-io-advanced-chat",
   "version": "0.0.1",
+  "main": "server.js",
   "description": "my first socket.io app",
   "dependencies": {
     "express": "^4.10.2",
     "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-concurrent": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-nodemon": "*"
   }
 }

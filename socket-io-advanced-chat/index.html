@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+     <!-- livereload browser if dev -->
+  <script src="//localhost:35729/livereload.js"></script>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <ul id="people" class="unstyled"></ul>
+      </div>
+      <div class="col-md-4">
+        <ul id="msgs" class="unstyled"></ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-2" id="login">
+        <form class="form-inline">
+          <input id="name" type="text" class="form-control" placeholder="Your name">
+          <input type="button" name="join" value="Join" id="join" class="btn btn-primary">
+        </form>
+      </div>
+      <div class="col-md-5 col-md-offset-2" id="chat">
+        <form id="2" class="form-inline">
+        <input type="text" class="form-control">
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script>
+      var socket = io();
+      $('form').submit(function() {
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      })
+      socket.on('chat message', function(msg) {
+        $('#messages').append($('<li>').text(msg));
+      })
+  </script>
+</body>
+</html>

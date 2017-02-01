@@ -1,0 +1,21 @@
+{
+  "name": "socket-chat-example",
+  "description": "my first socket.io app",
+  "main": "server.js",
+  "authors": [
+    "gaopinghuang0 <gaopinghuang@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gaopinghuang0/learn-nodejs",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
