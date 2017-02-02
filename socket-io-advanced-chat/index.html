@@ -34,84 +34,85 @@
     </div>
   </div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/libs/jquery/dist/jquery.min.js"></script>
-  <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      var socket = io();
-      var ready;
+<script src="/socket.io/socket.io.js"></script>
+<script src="/libs/jquery/dist/jquery.min.js"></script>
+<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var socket = io();
+    var ready;
 
-      $('#chat').hide();
-      $('#name').focus();
-      $('form').submit(function(evt) {
-        evt.preventDefault();
-      });
+    $('#chat').hide();
+    $('#name').focus();
+    $('form').submit(function(evt) {
+      evt.preventDefault();
+    });
 
-      $('#join').click(function() {
+    $('#join').click(function() {
+      onSubmitName();
+    })
+    $("#name").keypress(function(e){
+      if(e.which == 13) {
         onSubmitName();
-      })
-      $("#name").keypress(function(e){
-        if(e.which == 13) {
-          onSubmitName();
-        }
-      });
-
-      socket.on('update', function(msg) {
-        if (ready) {
-          $('#msgs').append($('<li>').text(msg));
-        }
-      })
-
-      socket.on('update-people', function(people) {
-        if (ready) {
-          $('#people').empty();
-          $.each(people, function(clientid, name) {
-            $('#people').append($('<li>').text(name));
-          })
-        }
-      })
-
-      socket.on('chat', function(who, msg) {
-        if (ready) {
-          $('#msgs').append($('<li>').text(who + ' says: ' + msg))
-        }
-      })
-
-      socket.on("disconnect", function(){
-        $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
-        $("#msg").attr("disabled", "disabled");
-        $("#send").attr("disabled", "disabled");
-      });
-
-      $("#send").click(function(){
-        onSubmitMsg();
-      });
-      $('#msg').keypress(function(e) {
-        if (e.which == 13) {
-          onSubmitMsg();
-        }
-      })
-
-      function onSubmitName() {
-        var name = $('#name').val();
-        if (name.length) {
-          socket.emit('join', name);
-          $('#login').detach();
-          $('#chat').show();
-          $('#msg').focus();
-          ready = true;
-        }
       }
+    });
 
-      function onSubmitMsg() {
-       var msg = $("#msg").val();
-       socket.emit("send", msg);
-       $("#msg").val("");       
-     }
+    socket.on('update', function(msg) {
+      if (ready) {
+        $('#msgs').append($('<li>').text(msg));
+      }
+    })
+
+    socket.on('update-people', function(people) {
+      if (ready) {
+        $('#people').empty();
+        $.each(people, function(clientid, name) {
+          $('#people').append($('<li>').text(name));
+        })
+      }
+    })
+
+    socket.on('chat', function(who, msg) {
+      if (ready) {
+        $('#msgs').append($('<li>').text(who + ' says: ' + msg))
+      }
+    })
+
+    socket.on("disconnect", function(){
+      $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
+      $("#msg").attr("disabled", "disabled");
+      $("#send").attr("disabled", "disabled");
+    });
+
+    $("#send").click(function(){
+      onSubmitMsg();
+    });
+    $('#msg').keypress(function(e) {
+      if (e.which == 13) {
+        onSubmitMsg();
+      }
+    })
+
+    function onSubmitName() {
+      var name = $('#name').val();
+      if (name.length) {
+        socket.emit('join', name);
+        $('#login').detach();
+        $('#chat').show();
+        $('#msg').focus();
+        ready = true;
+      }
+    }
+
+    function onSubmitMsg() {
+     var msg = $("#msg").val();
+     socket.emit("send", msg);
+     $("#msg").val("");       
+   }
 
 
-   })
- </script>
+ })
+
+</script>
 </body>
 </html>
